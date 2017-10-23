@@ -34,8 +34,12 @@ post '/create' do
 	@post = Post.new
 	@post.title = params[:title]
 	@post.body = params[:body]
-	@post.save
-	return "Succesfully submited"
+	if @post.title == "" && @post.body == ""
+		return "DENIED"
+	else
+		@post.save
+		erb :success
+	end
 end
 
 get '/' do
